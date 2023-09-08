@@ -1,0 +1,56 @@
+print('Welcome to XYZ Bank.')
+username = input("Enter your name: ")
+account_num = input("Enter your 16 digit account number: ")
+required_length = 16
+if len(account_num) == required_length:
+    print("Account number is valid.")
+else:
+    print(f"Account number must be {required_length} digits long.")
+
+print("Options: 1. Deposit   2. Withdrawal   3. Balance Enquiry")
+
+class Account:
+    def __init__(self, name, balance, min_balance):
+        self.name = name
+        self.balance = balance
+        self.min_balance = min_balance
+
+    def deposit(self, amount):
+        self.balance += amount
+        print(f"Deposited {amount} Rupees.")
+        print(f"Current balance: {self.balance} Rupees.")
+
+    def withdraw(self, amount):
+        if self.balance - amount >= self.min_balance:
+            self.balance -= amount
+            print(f"Withdrew {amount} Rupees.")
+            print(f"Current balance: {self.balance} Rupees.")
+        else:
+            print("Sorry, insufficient balance.")
+    def balance_enquiry(self):
+        print(f"Account balance: {self.balance} Rupees.")
+
+
+# Create an instance of the Account class
+account = Account(username, 1000, 500)
+
+# Process customer's choice
+while True:
+    choice = input("Enter your choice (1-3): ")
+
+    if choice == "1":
+        amount_to_deposit = float(input("Enter amount to deposit: "))
+        account.deposit(amount_to_deposit)
+    elif choice == "2":
+        amount_to_withdraw = float(input("Enter amount to withdraw: "))
+        account.withdraw(amount_to_withdraw)
+    elif choice == "3":
+        print(f"Account balance: {account.balance} Rupees.")
+    else:
+        print("Invalid choice.")
+
+    options = input("Would you like to continue the transactions? Enter 'yes' or 'no': ")
+    if options.lower() != 'yes':
+        break
+
+print("Thank you for using XYZ Bank!!!")
